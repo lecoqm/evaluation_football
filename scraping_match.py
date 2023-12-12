@@ -51,28 +51,37 @@ def scrap_table(url,table):
         table_tbody = tableau_resume.find("tbody")
         rows = table_tbody.find_all('tr')
 
-        for i in range(len(rows)):
-            cols = [ele.text.strip() for ele in rows[i]]
-            #print(cols)
-
         dico_joueur = dict()
         for i in range(len(rows)):
+            tag_player = rows[i].find("th")['data-append-csv']
             cols = [ele.text.strip() for ele in rows[i]]
+            cols.insert(0,tag_player)
             if len(cols) > 0 : 
                 dico_joueur[cols[0]] = cols[1:]
+        
+        
+        header = tableau_resume.find("thead")
+        var = header.find_all('tr')
+        var2 = var[1].find_all("th")
+        var_list = [(var2[i]['aria-label']) for i in range(len(var2))]
+
         #On fusionne les tables
-        table_tag = pd.DataFrame.from_dict(dico_joueur,orient='index')
+        
+        table_tag = (pd.DataFrame.from_dict(dico_joueur,orient='index'))
+        table_tag.columns = var_list
         table_tag['match tag'] = tag
-        final_table = pd.concat([final_table,table_tag], ignore_index = True)
-    
-    
+        table_tag['player tag'] = table_tag.index.tolist()
+        #Add the player tag
+        final_table = pd.concat([final_table,table_tag], ignore_index = False)
     
     #Il faut ajouter le nom des joueurs et leur tag
     #Il faut ajouter le titre des colonnes
     #Il faut récupérer les légendes
     return final_table
 
-print(scrap_table(url_Brighton,"passing_types"))
+tt = scrap_table(url_Brighton,"passing_types")
+print(tt)
+
 
 #Il faut créer les bonnes variables âges
 #Il faut ajouter l'ID du joueur
