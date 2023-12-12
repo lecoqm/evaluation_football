@@ -2,8 +2,14 @@ import bs4
 import lxml
 import json
 import urllib
-
 from urllib import request
+
+##########
+# Modify:
+# The url are exported in a json file
+file="/home/onyxia/work/evaluation_football/liste_url.json"   # Chose the path of the json file where the data will be exported
+##########
+
 
 def scraping(url, url_end, league):
     """This function scraps the reference of each matchs,
@@ -24,6 +30,8 @@ def scraping(url, url_end, league):
     if url!=url_end:
         scraping(url, url_end, league)
 
+
+
 # We parse all the page between two dates and scrap the urls
 # of all the matches in a league
 Refs_Matchs=[]
@@ -32,9 +40,6 @@ url_end = 'https://fbref.com/fr/matchs/2022-10-02'  # url of the last date (not 
 league = 'Premier League">'   # Use the name in the html code
 
 scraping(url_first, url_end, league)
-
-# The url are exported in a json file
-file="/home/onyxia/work/evaluation_football/liste_url.json"   # Change it to the file desired 
 
 with open(file, "w") as f:
     json.dump(Refs_Matchs, f)
