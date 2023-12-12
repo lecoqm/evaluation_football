@@ -6,7 +6,9 @@ import urllib
 from urllib import request
 
 def scraping(url, url_end, league):
-    # scrap the urls
+    """This function scraps the reference of each matchs,
+    the reference will after be use to find the page of
+    the match and to scrap the information of the match."""
     request_text = request.urlopen(url).read() 
     page = bs4.BeautifulSoup(request_text, 'lxml')
     L1=page.find_all('div',class_ = 'table_wrapper')
@@ -16,7 +18,7 @@ def scraping(url, url_end, league):
     if league in L2:
         urls_matchs=L1[L2.index(league)].find_all('td',attrs={'data-stat' : 'match_report'})
         for e in urls_matchs:
-            Urls_Matchs.append(e.find('a')['href'])
+            Refs_Matchs.append(e.find('a')['href'].split('/')[3])   # Take the reference of the match, it is enough to find the page of the match
     # go to the next page
     url='https://fbref.com'+page.find('a',class_ = 'button2 next')['href']
     if url!=url_end:
@@ -24,15 +26,15 @@ def scraping(url, url_end, league):
 
 # We parse all the page between two dates and scrap the urls
 # of all the matches in a league
-Urls_Matchs=[]
+Refs_Matchs=[]
 url_first = 'https://fbref.com/fr/matchs/2022-10-01' # url of the first date
 url_end = 'https://fbref.com/fr/matchs/2022-10-02'  # url of the last date (not scrapped)
-league = 'Premier League">'
+league = 'Premier League">'   # Use the name in the html code
 
 scraping(url_first, url_end, league)
 
 # The url are exported in a json file
-file="liste_url.json"
+file="/home/onyxia/work/evaluation_football/liste_url.json"   # Change it to the file desired 
 
 with open(file, "w") as f:
-    json.dump(Urls_Matchs, f)
+    json.dump(Refs_Matchs, f)
