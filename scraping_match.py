@@ -23,7 +23,7 @@ def scrap_table(url,table):
     #On récupère le text de la page
     request_text = request.urlopen(url).read() 
     page = bs4.BeautifulSoup(request_text, "lxml")
-    print(page.find("title").text.strip())
+    #print(page.find("title").text.strip())
 
     
     #On trouve les id des deux équipes des deux équipes
@@ -46,7 +46,7 @@ def scrap_table(url,table):
 
     for tag in Tag_team : 
         idtable = "div_stats_" + tag + "_" + table
-        print(idtable)
+        #print(idtable)
         tableau_resume = page.find(id = idtable)
         table_tbody = tableau_resume.find("tbody")
         rows = table_tbody.find_all('tr')
@@ -80,7 +80,19 @@ def scrap_table(url,table):
     return final_table
 
 tt = scrap_table(url_Brighton,"passing_types")
-print(tt)
+#print(tt)
+
+def scrap_match(url,table_list):
+
+    match_table = scrap_table(url,table_list[0])
+
+    for table in range(1,len(table_list)):
+        type_table = scrap_table(url,table_list[table])
+        match_table = pd.merge(match_table, type_table)
+    return match_table
+
+ttt = scrap_match(url_Brighton,list_table)
+print(ttt)
 
 
 #Il faut créer les bonnes variables âges
