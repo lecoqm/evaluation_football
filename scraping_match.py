@@ -40,7 +40,12 @@ def scrap_table(url,table):
     for link in List_link[:len(List_link)-1]: #Il y a un troisième élément indésirable
         elements = link.split('/')
         Tag_team.append(elements[3])
-        
+
+    
+
+    #On récupère le score du match dans une liste dans le même ordre que les tag d'équipes
+    all_score = scorebox.find_all('div',{"class": "score"})
+    match_score = [int(score.text) for score in all_score]
     #On récupère la table pour chacune des deux équipes
     final_table = pd.DataFrame()
 
@@ -74,12 +79,15 @@ def scrap_table(url,table):
         #Add the player tag
         final_table = pd.concat([final_table,table_tag], ignore_index = False)
     
-    #Il faut ajouter le nom des joueurs et leur tag
-    #Il faut ajouter le titre des colonnes
-    #Il faut récupérer les légendes
+    #On ajoute le score de chaque équipe
+    final_table['id_team_A'] = Tag_team[0]
+    final_table['score_team_A'] = match_score[0]
+    final_table['id_team_B'] = Tag_team[1]
+    final_table['score_team_B'] = match_score[1]
+
     return final_table
 
-tt = scrap_table(url_Brighton,"passing_types")
+#tt = scrap_table(url_Brighton,"passing_types")
 #print(tt)
 
 def scrap_match(url,table_list):
@@ -91,12 +99,5 @@ def scrap_match(url,table_list):
         match_table = pd.merge(match_table, type_table)
     return match_table
 
-ttt = scrap_match(url_Brighton,list_table)
-print(ttt)
-
-
-#Il faut créer les bonnes variables âges
-#Il faut ajouter l'ID du joueur
-#Il faut donner la ref du match
-#Il faut donner les autres catégories
+#ttt = scrap_match(url_Brighton,list_table)
 
