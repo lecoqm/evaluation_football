@@ -100,4 +100,3 @@ def scrap_match(url,table_list):
     return match_table
 
 #ttt = scrap_match(url_Brighton,list_table)
-
