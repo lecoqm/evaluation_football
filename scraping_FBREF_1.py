@@ -3,6 +3,7 @@ import lxml
 import json
 import urllib
 from urllib import request
+import time
 
 ##########
 # Modify:
@@ -15,6 +16,8 @@ def scraping(url, url_end, league):
     """This function scraps the reference of each matchs,
     the reference will after be use to find the page of
     the match and to scrap the information of the match."""
+    time.sleep(3)
+    print(url)
     request_text = request.urlopen(url).read() 
     page = bs4.BeautifulSoup(request_text, 'lxml')
     L1=page.find_all('div',class_ = 'table_wrapper')
