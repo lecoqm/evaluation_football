@@ -96,7 +96,13 @@ def scrap_match(url,table_list):
 
     for table in range(1,len(table_list)):
         type_table = scrap_table(url,table_list[table])
-        match_table = pd.merge(match_table, type_table)
+        suffix = ['score_team_A', 'id_team_B', 'Âge', 
+                    'match tag', 'id_team_A', 'Emplacement', 
+                    'Nation', 'Minutes', 'player tag', 
+                    'score_team_B', 'Numéro de maillot']
+        type_table = type_table.drop(columns=suffix)
+        match_table = pd.merge(match_table, type_table, on = "Joueur")
     return match_table
 
 #ttt = scrap_match(url_Brighton,list_table)
+#print(ttt)
