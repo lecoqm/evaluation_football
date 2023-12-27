@@ -20,7 +20,7 @@ def scrap_ligue(file):
 
     for tag in match_list :
         print(tag)
-        time.sleep(3)
+        time.sleep(36)
         url_match = 'https://fbref.com/fr/matchs/' + tag
         match_table = scrap_match(url_match,list_table)
         pd.concat([df_league,match_table], ignore_index = False)
