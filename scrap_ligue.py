@@ -17,7 +17,7 @@ def scrap_ligue(file):
     df_league = pd.DataFrame()
     print(match_list)
 
-    for tag in match_list[:100]:
+    for tag in match_list:
         print(tag)
         time.sleep(5)
         url_match = 'https://fbref.com/fr/matchs/' + tag
@@ -28,6 +28,6 @@ def scrap_ligue(file):
 
 
 PL_2022_2023 = scrap_ligue("/home/onyxia/work/evaluation_football/liste_url.json")
-PL_2022_2023.to_csv("/home/onyxia/work/evaluation_football/data_premierleague_2022_2023_V1.csv")
+PL_2022_2023.to_csv("/home/onyxia/work/evaluation_football/data_premierleague_2022_2023_V2.csv")
 
 
