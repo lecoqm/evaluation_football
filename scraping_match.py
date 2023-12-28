@@ -77,7 +77,8 @@ def scrap_match(url,table_list):
         
             table_tag = (pd.DataFrame.from_dict(dico_joueur,orient='index'))
             table_tag.columns = var_list
-            table_tag['match tag'] = tag
+            table_tag['team tag'] = tag
+            table_tag['match tag'] = url.split('/')[5]
             table_tag['player tag'] = table_tag.index.tolist()
             #Add the player tag
             final_table = pd.concat([final_table,table_tag], ignore_index = False)
@@ -97,10 +98,10 @@ def scrap_match(url,table_list):
         suffix = ['score_team_A', 'id_team_B', 'Âge', 
                     'match tag', 'id_team_A', 'Emplacement', 
                     'Nation', 'Minutes', 'player tag', 
-                    'score_team_B', 'Numéro de maillot']
+                    'score_team_B', 'Numéro de maillot', "team tag"]
         type_table = type_table.drop(columns=suffix)
         match_table = pd.merge(match_table, type_table, on = "Joueur")
     return match_table
 
 #ttt = scrap_match(url_Brighton,list_table)
-#print(ttt)
+#print(ttt['match tag'])
