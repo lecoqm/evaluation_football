@@ -20,7 +20,7 @@ data_pl_2['home_num'] = np.where(data_pl_2['home'] == True, 1,0)
 
 #print(data_pl_2.columns[:10])
 #print(data_pl_2.columns[10:20])
-x = data_pl_2[data_pl_2.columns[8:20]]
+#x = data_pl_2[data_pl_2.columns[8:20]]
 #x = data_pl_2[['home_num','Minutes']]
 y = data_pl_2['buts_equipes'].values.reshape(-1,1)
 
@@ -35,5 +35,29 @@ def reg_simple(x,y):
     
     return slope, mse, r2
 
-print(reg_simple(x,y))
+#print(reg_simple(x,y))
+
+stat_forward = data_pl_2.columns[8:20]
+dict_forward = {}
+for stat in stat_forward:
+    x = data_pl_2[[stat]]
+    result_reg = reg_simple(x,y)
+    #print(result_reg)
+    dict_forward[stat] = result_reg
+
+
+
+
+import matplotlib.pyplot as plt
+
+var = dict_forward.keys()
+r2list = [ele[2] for ele in dict_forward.values()]
+
+plt.bar(var, r2list, color='blue')
+plt.xlabel('Variable')
+plt.ylabel('R²')
+plt.title('Title')
+plt.show()
+
+
 
