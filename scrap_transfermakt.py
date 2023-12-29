@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import lxml
 import pandas as pd
 import urllib
+import time
 
 import requests
 
@@ -10,14 +11,6 @@ import requests
 
 headers = {'User-Agent': 
            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'}
-
-page = "https://www.transfermarkt.co.uk/transfers/transferrekorde/statistik?saison_id=alle&land_id=0&ausrichtung=&spielerposition_id=&altersklasse=&leihe=&w_s=&plus=1"
-pageTree = requests.get(page, headers=headers)
-pageSoup = BeautifulSoup(pageTree.content, 'html.parser')
-
-Players = pageSoup.find_all("a", {"class": "spielprofil_tooltip"})
-Values = pageSoup.find_all("td", {"class": "rechts hauptlink"})
-Age = pageSoup.find_all("td", {"class": "zentriert"})
 
 
 def scrap_team_value(url):
@@ -44,4 +37,42 @@ def scrap_team_value(url):
 
     return dico_value
 
-print(scrap_team_value("https://www.transfermarkt.fr/manchester-city/startseite/verein/281/saison_id/2022"))
+#print(scrap_team_value("https://www.transfermarkt.fr/manchester-city/startseite/verein/281/saison_id/2022"))
+
+def scrap_value_league(url) :
+
+    request_text = requests.get(url, headers = headers) 
+    page = BeautifulSoup(request_text.content, 'html.parser')
+
+    List_url_team  = []
+    table = page.find(id="yw1")
+    table_values = table.find("tbody")
+    List_link = table_values.find_all('td',{"class": "zentriert no-border-rechts"})
+    for e in List_link:
+            List_url_team.append("https://www.transfermarkt.fr" + e.find('a')['href'])
+    #print(List_url_team)
+    value_league = pd.DataFrame()
+
+    for team in List_url_team :
+        print(team)
+        time.sleep(3)
+        dict_team = scrap_team_value(team)
+        df_team = pd.DataFrame.from_dict(dict_team,orient='index')
+        value_league = pd.concat([value_league,df_team], ignore_index = False)
+
+    return value_league
+
+
+#TM= scrap_value_league("https://www.transfermarkt.fr/premier-league/startseite/wettbewerb/GB1/plus/?saison_id=2022")
+#TM.to_csv("/home/onyxia/work/evaluation_football/tm.csv")
+
+right = pd.read_csv("/home/onyxia/work/evaluation_football/tm.csv")
+left = pd.read_csv("/home/onyxia/work/evaluation_football/df_PL.csv")
+left.set_index('Joueur', inplace= True)
+right.columns = ['Joueur', 'Valeur', 'Date naissance']
+right.set_index('Joueur', inplace= True)
+
+merged_df = pd.merge(left, right, how='left', left_index=True, right_index=True)
+merged_df = merged_df.sort_values(by = "Unnamed: 0.1")
+print(merged_df)
+print(merged_df['Valeur'].isna().sum())
