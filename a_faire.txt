@@ -1,5 +1,0 @@
-dans le cleaning, il faut regrouper les postes ou on va pas s'en sortir
-Parfois un joueur peut avoir des précisions trop précises sur son poste donc je propose de
-simplement prendre la première occurence
-Exemple : 
-DM,CM => DM
