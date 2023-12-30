@@ -18,7 +18,7 @@ Cette performance est individuelle et le plus possible indépendante de la perfo
 Pour la recréer dans le cadre du football européen, nous allons devoir récupérer les données nécessaires à la création d'une telle statistique, les explorer pour voir comment recréer la statistique WAR, mettre en œuvre la stratégie choisie et observer la performance des joueurs ainsi obtenue. On proposera à la fin du notebook une petite application de cette statistique dans le cadre du management d'une équipe et nous aurons besoin pour cela de la valeur marchande des joueurs.
 Comme dans le football on compte le nombre de points et pas de victoires (une victoire donne 3 points, un nul 1 et une défaite 0), on nommera plutôt la statistique créée PAR (Points Above Replacement).
 La démarche de création du PAR est explicitée dans le corps de ce notebook au cours de l’analyse, mais elle s’inspire fondamentalement de la méthode développée par le site Fan Graph pour le baseball (https://library.fangraphs.com/war/war-position-players/). 
-Bien sûr, tout l’enjeu est de la réadapté au football et de voir si elle fonctionne pour ce sport.
+Bien sûr, tout l’enjeu est de la réadapter au football et de voir si elle fonctionne pour ce sport.
 De plus il existe, à notre connaissance, une seule vraie tentative de recréation de la WAR au football et elle est le fait d’un américain (https://www.americansocceranalysis.com/home/2019/1/11/points-above-replacement) . Mais ce dernier utilise des données de position (avec l’endroit où se situent la balle et les joueurs à chaque instant) et sa méthode n’est donc pas du tout applicable à notre situation. Ces données sont payantes, très difficiles à exploiter et nous souhaitons créer un outil plus accessible. 
 
 
