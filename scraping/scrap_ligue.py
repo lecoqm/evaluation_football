@@ -12,6 +12,7 @@ from scraping_match import scrap_match
 list_table = ["summary","passing","passing_types","defense","possession","misc"]
 
 def scrap_ligue(file):
+    # On récupère les matchs à scraper
     json_file = open(file)
     match_list = json.load(json_file)
     df_league = pd.DataFrame()
@@ -19,8 +20,10 @@ def scrap_ligue(file):
 
     for tag in match_list:
         print(tag)
+        # time.sleep nécesaire pour éviter de se faire bloquer
         time.sleep(5)
         url_match = 'https://fbref.com/fr/matchs/' + tag
+        # On récupère les éléments présents dans le tableau récapitulatif du match
         match_table = scrap_match(url_match,list_table)
         df_league = pd.concat([df_league,match_table], ignore_index = False)
     
