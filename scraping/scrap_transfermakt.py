@@ -62,17 +62,7 @@ def scrap_value_league(url) :
 
     return value_league
 
-
+#Ci dessous, cela lance le scrap de toute la premier league anglaise sur la saison 2022-2023
 #TM= scrap_value_league("https://www.transfermarkt.fr/premier-league/startseite/wettbewerb/GB1/plus/?saison_id=2022")
 #TM.to_csv("/home/onyxia/work/evaluation_football/tm.csv")
 
-right = pd.read_csv("/home/onyxia/work/evaluation_football/tm.csv")
-left = pd.read_csv("/home/onyxia/work/evaluation_football/df_PL.csv")
-left.set_index('Joueur', inplace= True)
-right.columns = ['Joueur', 'Valeur', 'Date naissance']
-right.set_index('Joueur', inplace= True)
-
-merged_df = pd.merge(left, right, how='left', left_index=True, right_index=True)
-merged_df = merged_df.sort_values(by = "Unnamed: 0.1")
-print(merged_df)
-print(merged_df['Valeur'].isna().sum())
