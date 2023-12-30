@@ -29,8 +29,9 @@ def scrap_ligue(file):
     
     return df_league
 
+# Test, attention prend une quarantaine de minutes
 
-PL_2022_2023 = scrap_ligue("/home/onyxia/work/evaluation_football/liste_url.json")
-PL_2022_2023.to_csv("/home/onyxia/work/evaluation_football/data_premierleague_2022_2023_V2.csv")
+#PL_2022_2023 = scrap_ligue("/home/onyxia/work/evaluation_football/liste_url.json")
+#PL_2022_2023.to_csv("/home/onyxia/work/evaluation_football/data_premierleague_2022_2023_V3.csv")
 
 
