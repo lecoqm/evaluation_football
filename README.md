@@ -40,6 +40,6 @@ Cette dernière partie du read.me revient sur les motivations derrière le choix
 
 Si les statistiques avancées sont devenues très populaires dans le sport américain, cette enthousiasme n'a pas traversé l'Atlantique pour deux raisons.
 
-Tout d'abord il existe une réticence des européens à voir le sport être quantifié, ce qui enleverait la beauté du jeu aux yeux de certains. De plus, là où le baseball est un sport facilement à séquencer, quantifier et analyse, cela est beaucoup plus difficile (et intéressant !) pour le football où le jeu est plus dynamique.
+Tout d'abord il existe une réticence des européens à voir le sport être quantifié, ce qui enleverait la beauté du jeu aux yeux de certains. De plus, là où le baseball est un sport facile à séquencer, quantifier et analyse, cela est beaucoup plus difficile (et intéressant !) pour le football où le jeu est plus dynamique.
 
 Néanmoins, les choses changent dans le football et les Expected Goals, statistiques avancées utilisant les positionnements des joueurs sur le terrain gagnent en popularité et ouvrent la porte à de nouvelles opportunités pour le traitement statistique du football. C'est ici que s'inscrit notre démarche.
