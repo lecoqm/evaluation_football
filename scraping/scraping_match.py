@@ -103,5 +103,5 @@ def scrap_match(url,table_list):
         match_table = pd.merge(match_table, type_table, on = "Joueur")
     return match_table
 
-#ttt = scrap_match(url_Brighton,list_table)
-#print(ttt['match tag'])
+ttt = scrap_match(url_Brighton,list_table)
+print(ttt)

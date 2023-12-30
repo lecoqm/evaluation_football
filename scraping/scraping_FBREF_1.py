@@ -9,7 +9,7 @@ import time
 # Modify:
 # The url are exported in a json file
 file="/home/onyxia/work/evaluation_football/liste_url.json"   # Path of the json file where the data will be exported
-url_first = 'https://fbref.com/fr/matchs/2022-08-04' # url of the first date
+url_first = 'https://fbref.com/fr/matchs/2023-05-28' # url of the first date  2022-08-04
 url_end = 'https://fbref.com/fr/matchs/2023-05-29'  # url of the last date (not scrapped)
 league = 'Premier League">'   # Use the name in the html code
 ##########
@@ -20,6 +20,7 @@ def scraping(url, url_end, league):
     the reference will after be use to find the page of
     the match and to scrap the information of the match."""
     print(url)
+    Refs_Matchs = []
     request_text = request.urlopen(url).read() 
     page = bs4.BeautifulSoup(request_text, 'lxml')
     L1=page.find_all('div',class_ = 'table_wrapper')
@@ -35,14 +36,13 @@ def scraping(url, url_end, league):
     if url!=url_end:
         time.sleep(7)
         scraping(url, url_end, league)
-
+    print(Refs_Matchs)
+    return Refs_Matchs
 
 
 # We parse all the page between two dates and scrap the urls
 # of all the matches in a league
-Refs_Matchs=[]
-
-scraping(url_first, url_end, league)
-
-with open(file, "w") as f:
-    json.dump(Refs_Matchs, f)
+Refs_Matchs = scraping(url_first, url_end, league)
+print(Refs_Matchs)
+#with open(file, "w") as f:
+#    json.dump(Refs_Matchs, f)
