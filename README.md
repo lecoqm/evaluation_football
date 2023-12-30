@@ -7,6 +7,8 @@ Le but de ce projet est d'essayer d'importer des méthodes d'évaluation d'un jo
 
 Ce README contient un résumé des éléments présents dans le notebook.
 
+METTRE QU'ON NE VEUT PAS UTILISER LES DONNEES DE POSITION
+
 ## Récapitulatif des éléments présents dans le Git
 
 - **`data`** contient toutes les bases de données scrappées brutes et netoyées
@@ -15,3 +17,16 @@ Ce README contient un résumé des éléments présents dans le notebook.
 ## Etape 1 : Extraction des données
 
 Les données ont été récoltées sur les matchs de Premier League pour la saison 2022-2023 sur le site [**FB**REF](https://fbref.com/fr/). Ce dernier possède de nombreuses données pour chaqu'un des joueurs pour chaque match. 
+
+
+
+
+## Un mot sur notre motivation
+
+Cette dernière partie du read.me revient sur les motivations derrière le choix de ce projet. Elle n'a pas besoin d'être lue entièrement pour comprendre le code mais elle permet de comprendre dans quelle contexte s'inscrit notre démarche.
+
+# Les statistiques dans le sport américain et la statistique WAR (Wins Above Replacement)
+
+# La difficile transposition au football européen
+
+# Références
